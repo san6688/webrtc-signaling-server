@@ -1,3 +1,5 @@
+import { emitMessage } from "./helper.js";
+import * as EVENTS from "./events.js";
 export class Channel {
   constructor(size) {
     this.private = new Map(); // will be used for peer-peer communication
@@ -20,6 +22,7 @@ export class Channel {
       return this.private.get(channelId);
     } else {
       console.log(`${channelId} - does not exist`);
+      return null;
     }
   }
   join(channelId, socketId) {
