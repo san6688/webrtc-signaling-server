@@ -38,7 +38,22 @@ wss.on("connection", (socket) => {
   socket.once("close", () => {
     console.log(`socket - ${socket.id}::close`);
     if (socket.channel) {
-      channels.leave(socket.channel, socket.id);
+      var res = channels.leave(socket.channel, socket.id);
+      if (res?.status === "OK") {
+        const _channelClients = channels.getClients(socket.channel);
+        if (_channelClients) {
+          Array.from(_channelClients).forEach((peerId) => {
+            const _peer = wss.getSocketById(peerId);
+            emitMessage(_peer, {
+              type: EVENTS.PEER_DISCONNECTED,
+              data: {
+                status: "OK",
+                msg: `Peer ${socket.id} left channel ${socket.channel}`,
+              },
+            });
+          });
+        }
+      }
     }
   });
 });
