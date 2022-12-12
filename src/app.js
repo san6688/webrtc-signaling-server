@@ -1,5 +1,5 @@
 import { createServer } from "http";
-import { readFileSync } from "fs";
+import express from "express";
 import { nanoid } from "nanoid";
 //import { WebSocketServer } from "ws";
 import CustomWebSocketServer from "./customWebsocketServer.js";
@@ -7,7 +7,13 @@ import * as EVENTS from "./events.js";
 import { Channel } from "./channel.js";
 import { emitMessage } from "./helper.js";
 
-export const wsServer = createServer();
+const app = express();
+app.use(express.static("./public"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+export const wsServer = createServer(app);
 //   {
 //   cert: readFileSync("./ssl/cert.pem"),
 //   key: readFileSync("./ssl/cert.key"),
