@@ -1,4 +1,5 @@
 import { wsServer } from "./app.js";
 
-wsServer.listen(8888);
-console.log("wss server listening on port 8888");
+const port = process.env.PORT || 8888;
+wsServer.listen(port);
+console.log("wss server listening on port " + port);
