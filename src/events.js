@@ -1,10 +1,12 @@
 //Incoming
 export const INIT = "INIT";
+export const PING = "PING";
 export const OPEN_CHANNEL = "OPEN_CHANNEL";
 export const JOIN_CHANNEL = "JOIN_CHANNEL";
 export const LEAVE_CHANNEL = "LEAVE_CHANNEL";
 
 //outgoing
+export const PONG = "PONG";
 export const INIT_SUCCESS = "INIT_SUCCESS";
 export const OPENED_CHANNEL = "OPENED_CHANNEL";
 export const JOIN_SUCCESS = "JOIN_SUCCESS";

@@ -67,6 +67,12 @@ const handleEvent = (socket, event) => {
         data: { id: socket.id },
       });
       break;
+    case EVENTS.PING:
+      emitMessage(socket, {
+        type: EVENTS.PONG,
+        data: {},
+      });
+      break;
     case EVENTS.OPEN_CHANNEL:
       var res = channels.open(event.data.deviceId);
       emitMessage(socket, {
